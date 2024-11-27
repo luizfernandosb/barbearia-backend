@@ -18,6 +18,8 @@ export const addFeedback = async (req: Request, res: Response) => {
     if (!feedback || !rate || !name) {
       throw new Error("Preencha todos os campos.");
     }
+    if (feedback.length > 500)
+      throw new Error("Feedback deve ter no máximo 500 caracteres.");
     const newFeedback = await prisma.feedback.create({
       data: {
         name,
@@ -27,7 +29,7 @@ export const addFeedback = async (req: Request, res: Response) => {
     });
     res.status(201).json(newFeedback);
   } catch (error) {
-    // console.log(error)
-    res.status(500).json({ error: "Erro ao enviar feedbacl." });
+    console.error(error);
+    res.status(500).json({ error: "Erro ao enviar feedback." });
   }
 };

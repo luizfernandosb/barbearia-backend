@@ -30,6 +30,8 @@ const addFeedback = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (!feedback || !rate || !name) {
             throw new Error("Preencha todos os campos.");
         }
+        if (feedback.length > 500)
+            throw new Error("Feedback deve ter no máximo 500 caracteres.");
         const newFeedback = yield prisma_1.default.feedback.create({
             data: {
                 name,
@@ -40,8 +42,8 @@ const addFeedback = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(201).json(newFeedback);
     }
     catch (error) {
-        // console.log(error)
-        res.status(500).json({ error: "Erro ao enviar feedbacl." });
+        console.error(error);
+        res.status(500).json({ error: "Erro ao enviar feedback." });
     }
 });
 exports.addFeedback = addFeedback;
