@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://invictus-barber.vercel.app/"], // Origens permitidas
+    origin: ["http://localhost:5173","https://invictus-barber.vercel.app"], // Origens permitidas
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Métodos HTTP
     allowedHeaders: ["Content-Type", "Authorization", "token"], // Cabeçalhos permitidos
   })
